@@ -49,10 +49,3 @@ TerraformEMRDeploy/
 ```
 
 
-// aws s3 mb s3://terraform-emr-state-bucket --region eu-west-2
-// aws dynamodb create-table --table-name terraform-emr-lock-table --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --region eu-west-2
-
-
-
-
-
