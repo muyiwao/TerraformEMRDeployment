@@ -1,0 +1,50 @@
+[
+  {
+    "Classification": "spark",
+    "Properties": {
+      "maximizeResourceAllocation": "true"
+    }
+  },
+  {
+    "Classification": "spark-defaults",
+    "Properties": {
+      "spark.dynamicAllocation.enabled": "true",
+      "spark.dynamicAllocation.minExecutors": "1",
+      "spark.dynamicAllocation.maxExecutors": "10",
+      "spark.executor.memory": "4g",
+      "spark.executor.cores": "2",
+      "spark.driver.memory": "4g",
+      "spark.yarn.jars": "s3://my-spark-libs-env/spark/libs/*",
+      "spark.serializer": "org.apache.spark.serializer.KryoSerializer"
+    }
+  },
+  {
+    "Classification": "yarn-site",
+    "Properties": {
+      "yarn.nodemanager.vmem-check-enabled": "false",
+      "yarn.nodemanager.pmem-check-enabled": "false",
+      "yarn.resourcemanager.hostname": "localhost",
+      "yarn.log-aggregation-enable": "true",
+      "yarn.log-aggregation.retainSeconds": "604800"
+    }
+  },
+  {
+    "Classification": "hadoop-env",
+    "Configurations": [
+      {
+        "Classification": "export",
+        "Properties": {
+          "HADOOP_DATANODE_HEAPSIZE": "2048",
+          "HADOOP_NAMENODE_HEAPSIZE": "2048"
+        }
+      }
+    ]
+  },
+  {
+    "Classification": "core-site",
+    "Properties": {
+      "fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
+      "fs.s3a.fast.upload": "true"
+    }
+  }
+]
