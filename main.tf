@@ -27,6 +27,7 @@ module "iam" {
   source                  = "./iam"
   pyspark_scripts_bucket  = module.s3.pyspark_scripts_bucket
   emr_logs_bucket         = module.s3.emr_logs_bucket
+  spark_libraries_bucket  = module.s3.spark_libraries_bucket
 }
 
 
@@ -44,7 +45,8 @@ module "emr" {
   instance_profile      = module.iam.instance_profile_name
   service_role          = module.iam.service_role_name
   log_uri               = "s3://${module.s3.emr_logs_bucket}/emr-logs/"
-  pyspark_script_path   = "s3://${module.s3.pyspark_scripts_bucket}/spark_job.py"
+  //pyspark_script_path   = "s3://${module.s3.pyspark_scripts_bucket}/spark_job.py"
+  //spark_libraries_path  = "s3://${module.s3.spark_libraries_bucket}/"
 }
 
   //log_uri               = "s3://${module.s3.emr_logs.id}/emr-logs/"

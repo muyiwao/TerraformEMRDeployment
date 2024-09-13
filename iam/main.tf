@@ -46,7 +46,11 @@ data "aws_iam_policy_document" "emr_s3_access_policy" {
 
     resources = [
       "arn:aws:s3:::${var.pyspark_scripts_bucket}/*",
-      "arn:aws:s3:::${var.emr_logs_bucket}/*"
+      "arn:aws:s3:::${var.emr_logs_bucket}/*",
+      "arn:aws:s3:::${var.spark_libraries_bucket}",
+      "arn:aws:s3:::${var.spark_libraries_bucket}/*",
+      "arn:aws:s3:::terraform-emr-spark-bucket",
+      "arn:aws:s3:::terraform-emr-spark-bucket/*"
     ]
   }
 }

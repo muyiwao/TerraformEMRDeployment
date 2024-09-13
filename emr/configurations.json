@@ -9,13 +9,15 @@
     "Classification": "spark-defaults",
     "Properties": {
       "spark.dynamicAllocation.enabled": "true",
-      "spark.dynamicAllocation.minExecutors": "1",
-      "spark.dynamicAllocation.maxExecutors": "10",
-      "spark.executor.memory": "4g",
-      "spark.executor.cores": "2",
-      "spark.driver.memory": "4g",
+      "spark.dynamicAllocation.minExecutors": "2",
+      "spark.dynamicAllocation.maxExecutors": "20",
+      "spark.executor.memory": "6g",
+      "spark.executor.cores": "4",
+      "spark.driver.memory": "6g",
       "spark.yarn.jars": "s3://my-spark-libs-env/spark/libs/*",
-      "spark.serializer": "org.apache.spark.serializer.KryoSerializer"
+      "spark.serializer": "org.apache.spark.serializer.KryoSerializer",
+      "spark.network.timeout": "800s",
+      "spark.sql.shuffle.partitions": "200"
     }
   },
   {
@@ -23,9 +25,11 @@
     "Properties": {
       "yarn.nodemanager.vmem-check-enabled": "false",
       "yarn.nodemanager.pmem-check-enabled": "false",
-      "yarn.resourcemanager.hostname": "localhost",
+      "yarn.resourcemanager.hostname": "ip-10-0-1-82.eu-west-2.compute.internal",
       "yarn.log-aggregation-enable": "true",
-      "yarn.log-aggregation.retainSeconds": "604800"
+      "yarn.log-aggregation.retainSeconds": "604800",
+      "yarn.nodemanager.resource.memory-mb": "8192",
+      "yarn.scheduler.maximum-allocation-mb": "8192"
     }
   },
   {
@@ -34,8 +38,8 @@
       {
         "Classification": "export",
         "Properties": {
-          "HADOOP_DATANODE_HEAPSIZE": "2048",
-          "HADOOP_NAMENODE_HEAPSIZE": "2048"
+          "HADOOP_DATANODE_HEAPSIZE": "4096",
+          "HADOOP_NAMENODE_HEAPSIZE": "4096"
         }
       }
     ]
@@ -44,7 +48,8 @@
     "Classification": "core-site",
     "Properties": {
       "fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
-      "fs.s3a.fast.upload": "true"
+      "fs.s3a.fast.upload": "true",
+      "fs.s3a.connection.maximum": "100"
     }
   }
 ]

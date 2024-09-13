@@ -23,12 +23,26 @@ resource "aws_emr_cluster" "spark_cluster" {
 
   service_role = var.service_role
 
+  configurations_json = file("${path.module}/configurations.json")
+
+  step {
+    name              = "Setup - Debugging"
+    action_on_failure = "TERMINATE_CLUSTER"
+    hadoop_jar_step {
+      jar  = "command-runner.jar"
+      args = ["state-pusher-script"]
+    }
+  }
+
   step {
     name              = "Run PySpark Job"
     action_on_failure = "CONTINUE"
     hadoop_jar_step {
       jar  = "command-runner.jar"
-      args = ["spark-submit", "--deploy-mode", "cluster", var.pyspark_script_path]
+      //args = ["spark-submit", "--deploy-mode", "cluster", var.pyspark_script_path]
+      args = ["spark-submit", "--deploy-mode", "cluster", "s3://terraform-emr-spark-bucket/scripts/spark_job.py"]
+      //args = ["spark-submit", "--deploy-mode", "cluster", "--conf", "spark.yarn.jars=s3://my-spark-libs-env/spark/libs/*", var.pyspark_script_path]
     }
   }
 }
+

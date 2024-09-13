@@ -24,6 +24,7 @@ variable "log_uri" {
 }
 
 variable "pyspark_script_path" {
-  description = "S3 path to the PySpark script"
-  type        = string
+ description = "S3 path to the PySpark script"
+ type        = string
+ default     = "s3://terraform-emr-spark-bucket/scripts/spark_job.py"
 }

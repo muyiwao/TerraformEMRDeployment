@@ -27,11 +27,11 @@ resource "aws_s3_bucket_versioning" "spark_libs_versioning" {
 }
 
 resource "aws_s3_object" "spark_libraries" {
-  for_each = fileset("${path.module}/../spark-libs", "**/*")
+  for_each = fileset("${path.module}/../../spark-libs", "**/*")
   bucket   = aws_s3_bucket.spark_libs.id
   key      = "spark/libs/${each.value}"
-  source   = "${path.module}/../spark-libs/${each.value}"
-  etag     = filemd5("${path.module}/../spark-libs/${each.value}")
+  source   = "${path.module}/../../spark-libs/${each.value}"
+  etag     = filemd5("${path.module}/../../spark-libs/${each.value}")
 }
 
 resource "aws_s3_bucket" "pyspark_scripts" {
@@ -53,6 +53,7 @@ resource "aws_s3_object" "pyspark_script" {
     FileChecksum = filemd5("${path.module}/../spark_job.py")
   }
 }
+
 
 
 
